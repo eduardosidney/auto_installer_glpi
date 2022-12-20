@@ -3,8 +3,8 @@
 # Download the file and give the permission to run
 
 ```
-wget
+wget https://github.com/eduardosidney/auto_installer_glpi/blob/main/install.sh
 
-chmod +x install.sh
+sudo chmod +x install.sh
  
 ````
