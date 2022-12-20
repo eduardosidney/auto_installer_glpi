@@ -44,4 +44,4 @@ function permissions_and_enable()
 }
 deb_based_install -e "error"
 database_install -e "error"
-permission_and_enable -e "error"
+permissions_and_enable -e "error"
