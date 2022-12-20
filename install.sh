@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ####### Variables #######
 
 function deb_based_install()
