@@ -9,6 +9,8 @@ sudo chmod +x install.sh
 sudo ./install.sh
  
 ````
+
+````
 #!/bin/bash
 
 ####### Variables #######
@@ -78,3 +80,4 @@ function main()
     database_install -e "error"
     permissions_and_enable -e "error"
 }
+````
