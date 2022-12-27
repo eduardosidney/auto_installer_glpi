@@ -3,7 +3,7 @@
 ####### Variables #######
 Setup_Variables()
 {
-        DBPASSWORD=$(whiptail --passwordbox "set database password")
+        DBPASSWORD=$(whiptail --inputbox --title "GLPI installer" "Set DB Password for root" 25 80)
 }
 function deb_based_install()
 {
