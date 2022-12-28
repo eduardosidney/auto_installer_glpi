@@ -3,7 +3,7 @@
 ####### Variables #######
 Setup_Variables()
 {
-        DBPASSWORD=$(whiptail --inputbox --title "GLPI installer" "Set DB Password for root" 25 80)
+    DBPASSWORD=$(whiptail --inputbox --title "GLPI installer" "Set DB Password for root" 25 80)
 }
 function deb_based_install()
 {
@@ -29,8 +29,9 @@ function deb_based_install()
 }
 function mysql_sec_install()
 {
-        echo -e "\033[1;30m****** Configuration MariaDB \033[0m"
-        mysql_secure_installation <<EOF
+    echo -e "\033[1;30m****** Configuration MariaDB \033[0m"
+    mysql_secure_installation <<EOF
+
     y
     ${DBPASSWORD}
     ${DBPASSWORD}
@@ -42,23 +43,23 @@ EOF
 }
 function database_install()
 {
-        echo -e "\033[1;30m****** Configuring Database ******* \033[0m"
-        mysql -e "CREATE DATABASE glpi CHARACTER SET utf8"
-        mysql -e "CREATE USER 'glpi'@'localhost' IDENTIFIED BY 'Glpi#1'"
-        mysql -e "GRANT ALL PRIVILEGES ON glpi.* to 'glpi'@'localhost' WITH GRANT OPTION";
-        mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -p -u root mysql
-        mysql -e "GRANT SELECT ON mysql.time_zone_name TO 'glpi'@'localhost';"
-        mysql -e "FLUSH PRIVILEGES;"
-        echo -e "\033[1;30m****** Installing ******* \033[0m"
-        php /var/www/html/glpi/bin/console glpi:database:install --db-host=localhost --db-name=glpi --db-user=glpi --db-password=Glpi#1
+    echo -e "\033[1;30m****** Configuring Database ******* \033[0m"
+    mysql -e "CREATE DATABASE glpi CHARACTER SET utf8"
+    mysql -e "CREATE USER 'glpi'@'localhost' IDENTIFIED BY 'Glpi#1'"
+    mysql -e "GRANT ALL PRIVILEGES ON glpi.* to 'glpi'@'localhost' WITH GRANT OPTION";
+    mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -p -u root mysql
+    mysql -e "GRANT SELECT ON mysql.time_zone_name TO 'glpi'@'localhost';"
+    mysql -e "FLUSH PRIVILEGES;"
+    echo -e "\033[1;30m****** Installing ******* \033[0m"
+    php /var/www/html/glpi/bin/console glpi:database:install --db-host=localhost --db-name=glpi --db-user=glpi --db-password=Glpi#1
 }
 function permissions_and_enable()
 {
-        echo -e "\033[1;30m****** More Permissions ******* \033[0m"
-        chown www-data:www-data /var/www/html/glpi/files -Rf
-        echo -e "\033[1;30m****** Enable and start Apache ******* \033[0m"
-        systemctl enable apache2
-        systemctl restart apache2
+    echo -e "\033[1;30m****** More Permissions ******* \033[0m"
+    chown www-data:www-data /var/www/html/glpi/files -Rf
+    echo -e "\033[1;30m****** Enable and start Apache ******* \033[0m"
+    systemctl enable apache2
+    systemctl restart apache2
 }
 function main()
 {
